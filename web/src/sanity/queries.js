@@ -23,6 +23,18 @@ export const featuredProjectsQuery = groq`
   }
 `;
 
+export const projectsQuery = groq`
+  *[_type == "project"] | order(order asc) {
+    _id,
+    title,
+    "slug": slug.current,
+    summary,
+    industry,
+    techStack,
+    "coverImageUrl": images[0].asset->url
+  }
+`;
+
 export const openJobsQuery = groq`
   *[_type == "jobPosting" && status == "open"] | order(publishedAt desc) {
     _id,
